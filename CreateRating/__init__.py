@@ -16,13 +16,23 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
         if 'userId' not in req_body:
             logging.error('Missing userId')
             return func.HttpResponse(f"Missing userId", status_code=400)
+        if 'rating' not in req_body:
+            logging.error('Missing rating')
+            return func.HttpResponse(f"Missing rating", status_code=400)
+        if isinstance(req_body['rating'], int) is False:
+            logging.error('Rating is not numeric')
+            return func.HttpResponse(f"Rating is not numeric", status_code=400)
+        if req_body['rating'] < 0 or req_body['rating'] > 5:
+            logging.error('Rating out of range')
+            return func.HttpResponse(f"Rating out of range", status_code=400)
     except ValueError:
         return func.HttpResponse(f"Invalid entry", status_code=500)
 
     data = {}
     for val in ['productId', 'userId', 'rating', 'locationName', 'userNotes']:
-        data[val] = req_body[val]
+        data[val] = req_body.get[val]
     
+    if data['rating']
     data['id'] = str(uuid.uuid4())
     data['timestamp'] = datetime.utcnow().isoformat()
     doc.set(data)
