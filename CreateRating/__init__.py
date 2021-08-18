@@ -3,6 +3,7 @@ import logging
 import azure.functions as func
 import uuid
 from datetime import datetime
+import json
 
 
 def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpResponse:
@@ -30,9 +31,9 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
 
     data = {}
     for val in ['productId', 'userId', 'rating', 'locationName', 'userNotes']:
-        data[val] = req_body.get[val]
+        if val in req_body:
+            data[val] = req_body.get[val]
     
-    if data['rating']
     data['id'] = str(uuid.uuid4())
     data['timestamp'] = datetime.utcnow().isoformat()
     doc.set(data)

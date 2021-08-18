@@ -14,7 +14,7 @@
     {
       "type": "cosmosDB",
       "direction": "out",
-      "name": "byoc",
+      "name": "doc",
       "databaseName": "byoc-db",
       "collectionName": "ratings",
       "createIfNotExists": "true",
