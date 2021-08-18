@@ -6,7 +6,7 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "rating/{id}",
+      "route": "ratings/{userid}",
       "methods": [
         "get"
       ]
@@ -22,7 +22,7 @@
       "name": "doc",
       "databaseName": "byoc-db",
       "collectionName": "ratings",
-      "sqlQuery": "SELECT * from c where c.id = {id}",
+      "sqlQuery": "SELECT * from c where c.userId = {userid}",
       "connectionStringSetting": "AzureCosmosDBConnectionString"
     }
   ]
