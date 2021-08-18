@@ -39,6 +39,7 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
     data['id'] = str(uuid.uuid4())
     data['timestamp'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%SZ")
     doc.set(func.Document.from_dict(data))
+    
     return func.HttpResponse(
          json.dumps(data),
          status_code=200

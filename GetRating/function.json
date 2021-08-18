@@ -1,0 +1,30 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "ratings/{id}",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "doc",
+      "databaseName": "byoc-db",
+      "collectionName": "ratings",
+      "sqlQuery": "SELECT * from c where c.id = {id}",
+      "connectionStringSetting": "AzureCosmosDBConnectionString"
+    }
+  ]
+}
