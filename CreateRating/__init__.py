@@ -32,12 +32,14 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
     data = {}
     for val in ['productId', 'userId', 'rating', 'locationName', 'userNotes']:
         if val in req_body:
-            data[val] = req_body.get[val]
+            data[val] = req_body[val]
+        else:
+            data[val] = ""
     
     data['id'] = str(uuid.uuid4())
-    data['timestamp'] = datetime.utcnow().isoformat()
-    doc.set(data)
+    data['timestamp'] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%SZ")
+    doc.set(func.Document.from_dict(data))
     return func.HttpResponse(
-         "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+         json.dumps(data),
          status_code=200
     )
